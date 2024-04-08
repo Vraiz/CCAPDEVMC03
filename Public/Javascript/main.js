@@ -105,8 +105,6 @@ let formValidation = () => {
   if (isValid) {
     if (currentTaskID) {
       updateTask(currentTaskID);
-    } else {
-      createNewTask();
     }
     return true; // Indicate that form processing should continue
   }
@@ -132,26 +130,23 @@ let createNewTask = () => {
     taskCreditsReward: difficulty.value,
     taskStatus: statusInput.value,
   };
-
+  console.log('test')
   fetch('/tasks', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(taskData),
-  })
-  .then(response => {
+  }).then(response => {
     if (!response.ok) {
       throw new Error('Failed to create task');
     }
     return response.json();
-  })
-  .then(data => {
+  }).then(data => {
     alert('Task created successfully');
     displayTasks();
     resetForm();
-  })
-  .catch(error => {
+  }).catch(error => {
     console.error('Error:', error);
     alert('An error occurred while creating the task');
   });
@@ -356,4 +351,3 @@ function displayTasks() {
           console.error('Error fetching tasks:', error);
       });
 }
-
