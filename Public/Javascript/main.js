@@ -250,6 +250,18 @@ let completeTask = (taskID) => {
       console.error('Error:', error);
       alert('An error occurred while completing the task');
     });
+
+      let rollData = await readData()
+
+    fetch(('/userdatas/' + userID), {
+      method: "PATCH",
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          credits: rollData.credits + taskCreditsReward
+      })
+    })
 };
 
 let currentTaskID = null;
