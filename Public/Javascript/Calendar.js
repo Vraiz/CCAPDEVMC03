@@ -70,6 +70,15 @@ function load() {
                     const taskElement = document.createElement('div');
                     taskElement.classList.add('event'); // Apply 'event' class for styling
                     taskElement.textContent = task.taskName; // Simplify for demonstration
+
+                    const taskDueDate = new Date(task.taskDateDue);
+                    const currentDate = new Date();
+                    currentDate.setHours(0,0,0,0); // Reset hours for accurate comparison
+
+                    if (taskDueDate < currentDate) {
+                        taskElement.classList.add('overdue'); // Add 'overdue' class for overdue tasks
+                    }
+
                     daySquare.appendChild(taskElement);
                 });
                 
