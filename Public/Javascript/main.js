@@ -215,6 +215,43 @@ let deleteTask = (taskID) => {
     });
 };
 
+let completeTask = (taskID) => {
+  fetch(`/tasks/` + taskID)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch task data for completion');
+      }
+      return response.json();
+    })
+    .then(taskData => {
+      // Store the TaskCreditsReward temporarily
+      const taskCreditsReward = taskData.TaskCreditsReward;
+      console.log("TaskCreditsReward:", taskCreditsReward); // Log it or store it as needed
+
+      // Now update the task as completed
+      return fetch(`/tasks/` + taskID, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          taskStatus: 'Completed' // Update the status to Completed
+        }),
+      });
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to update task status to completed');
+      }
+      alert('Task marked as completed successfully!');
+      displayTasks(); // Refresh the task list to show the updated status
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while completing the task');
+    });
+};
+
 let currentTaskID = null;
 function showModal() {
   // Check if the elements exist before accessing their properties
@@ -344,6 +381,13 @@ function displayTasks() {
               deleteButton.addEventListener("click", () => deleteTask(task._id));
               taskElement.appendChild(deleteButton);
 
+              const completeButton = document.createElement("button")
+              editButton.textContent = "Complete Task";
+              editButton.setAttribute("type", "button");
+              editButton.classList.add("edit-btn", "btn", "btn-primary");
+              completeButton.addEventListener("click", () => completeTask(task._id));
+              taskElement.appendChild(completeButton);
+
               tasksContainer.appendChild(taskElement);
           });
       })
@@ -351,3 +395,13 @@ function displayTasks() {
           console.error('Error fetching tasks:', error);
       });
 }
+
+window.onload = function() {
+  let userID = localStorage.getItem("currentUserID")
+  if (userID == null || userID == undefined) {
+      window.location.href = "/"
+      console.log(userID)
+  } else {
+      console.log("no user")
+  }
+};
