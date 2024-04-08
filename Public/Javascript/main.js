@@ -215,7 +215,7 @@ let deleteTask = (taskID) => {
     });
 };
 
-let completeTask = (taskID) => {
+let completeTask = async (taskID) => {
   fetch(`/tasks/` + taskID)
     .then(response => {
       if (!response.ok) {
@@ -251,8 +251,7 @@ let completeTask = (taskID) => {
       alert('An error occurred while completing the task');
     });
 
-      let rollData = await readData()
-
+    let rollData = await readData()
     fetch(('/userdatas/' + userID), {
       method: "PATCH",
       headers: {
