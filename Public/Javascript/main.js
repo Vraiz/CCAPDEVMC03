@@ -127,7 +127,7 @@ let createNewTask = () => {
     taskName: textInput.value,
     taskDesc: textArea.value,
     taskDateDue: dateInput.value,
-    taskCreditsReward: difficulty.value,
+    TaskCreditsReward: difficulty.value,
     taskStatus: statusInput.value,
   };
   console.log('test')
