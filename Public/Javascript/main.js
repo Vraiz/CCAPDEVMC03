@@ -258,7 +258,7 @@ let completeTask = async (taskID) => {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-          credits: rollData.credits + taskCreditsReward
+          credits: rollData.credits + TaskCreditsReward
       })
     })
 };
