@@ -67,20 +67,19 @@ function load() {
                 // Filter tasks for this date and append them with class 'event'
                 const tasksForDay = tasks.filter(task => new Date(task.taskDateDue).toISOString().split('T')[0] === isoDayString);
                 tasksForDay.forEach(task => {
-                    // Check if the task is not deleted and not complete
                     if (!task.isTaskDeleted && task.taskStatus !== 'Complete') {
                         const taskElement = document.createElement('div');
-                        taskElement.classList.add('event'); // Apply 'event' class for styling
-                        taskElement.textContent = task.taskName; // Simplify for demonstration
+                        taskElement.classList.add('event'); 
+                        taskElement.textContent = task.taskName; 
                 
                         const taskDueDate = new Date(task.taskDateDue);
                         const currentDate = new Date();
-                        currentDate.setHours(0,0,0,0); // Reset hours for accurate comparison
+                        currentDate.setHours(0,0,0,0); 
                 
                         if (task.taskStatus === 'Started') {
-                            taskElement.classList.add('started'); // Add 'started' class for started tasks
+                            taskElement.classList.add('started'); 
                         } else if (taskDueDate < currentDate) {
-                            taskElement.classList.add('overdue'); // Add 'overdue' class for overdue tasks
+                            taskElement.classList.add('overdue'); 
                         }
                 
                         daySquare.appendChild(taskElement);
