@@ -10,15 +10,15 @@ function formatDateToISO(day, month, year) {
     return `${year}-${formattedMonth}-${formattedDay}`;
 }
 
-let tasksByDate = {}; // Object to hold tasks organized by their due dates
+let tasksByDate = {}; 
 
 function fetchTasks() {
     return fetch('/tasks/getUser/' + userID)
         .then(response => response.json())
         .then(tasks => {
-            tasksByDate = {}; // Reset tasksByDate
+            tasksByDate = {}; 
             tasks.forEach(task => {
-                const dueDate = new Date(task.taskDateDue).toISOString().split('T')[0]; // Use ISO string to avoid locale issues
+                const dueDate = new Date(task.taskDateDue).toISOString().split('T')[0]; 
                 if (!tasksByDate[dueDate]) {
                     tasksByDate[dueDate] = [];
                 }
@@ -64,7 +64,6 @@ function load() {
                 const isoDayString = formatDateToISO(day, month + 1, year);
                 daySquare.innerText = day;
 
-                // Filter tasks for this date and append them with class 'event'
                 const tasksForDay = tasks.filter(task => new Date(task.taskDateDue).toISOString().split('T')[0] === isoDayString);
                 tasksForDay.forEach(task => {
                     if (!task.isTaskDeleted && task.taskStatus !== 'Complete') {
