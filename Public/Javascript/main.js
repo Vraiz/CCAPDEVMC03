@@ -393,9 +393,9 @@ function displayTasks() {
               taskElement.appendChild(deleteButton);
 
               const completeButton = document.createElement("button")
-              editButton.textContent = "Complete Task";
-              editButton.setAttribute("type", "button");
-              editButton.classList.add("edit-btn", "btn", "btn-primary");
+              completeButton.textContent = "Complete Task";
+              completeButton.setAttribute("type", "button");
+              completeButton.classList.add("edit-btn", "btn", "btn-primary");
               completeButton.addEventListener("click", () => completeTask(task._id));
               taskElement.appendChild(completeButton);
 
