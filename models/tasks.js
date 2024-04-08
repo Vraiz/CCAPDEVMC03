@@ -44,7 +44,7 @@ const taskSchema = new mongoose.Schema({
     taskStatus: {
         type: String,
         required: true,
-        enum: ['Not Started', 'Started', 'Overdue'],
+        enum: ['Not Started', 'Started'],
         default: 'Not Started' 
     },
     isTaskDeleted: {

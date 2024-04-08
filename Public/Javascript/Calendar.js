@@ -75,7 +75,9 @@ function load() {
                     const currentDate = new Date();
                     currentDate.setHours(0,0,0,0); // Reset hours for accurate comparison
 
-                    if (taskDueDate < currentDate) {
+                    if (task.taskStatus === 'Started') {
+                        taskElement.classList.add('started'); // Add 'started' class for started tasks
+                    } else if (taskDueDate < currentDate) {
                         taskElement.classList.add('overdue'); // Add 'overdue' class for overdue tasks
                     }
 

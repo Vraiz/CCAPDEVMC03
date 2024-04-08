@@ -153,6 +153,10 @@ button {
   background-color: rgba(0,0,0,0.8);
 }
 
+.event.started {
+  background-color: #4CAF50; 
+}
+
 .event.overdue {
-  background-color: #d36c6c; /* Or any color that signifies urgency or overdue status */
+  background-color: #d36c6c; 
 }
