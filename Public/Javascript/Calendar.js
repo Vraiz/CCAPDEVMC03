@@ -55,6 +55,7 @@ function load() {
     fetch('/tasks/getUser/' + userID)
     .then(response => response.json())
     .then(tasks => {
+        tasks = tasks.filter(task => !task.isTaskDeleted && task.taskStatus !== 'Complete');
         for (let i = 1; i <= paddingDays + daysInMonth; i++) {
             const daySquare = document.createElement('div');
             daySquare.classList.add('day');
