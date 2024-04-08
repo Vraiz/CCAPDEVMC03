@@ -55,7 +55,6 @@ function load() {
     fetch('/tasks/getUser/' + userID)
     .then(response => response.json())
     .then(tasks => {
-        tasks = tasks.filter(task => !task.isTaskDeleted && task.taskStatus !== 'Complete');
         for (let i = 1; i <= paddingDays + daysInMonth; i++) {
             const daySquare = document.createElement('div');
             daySquare.classList.add('day');
@@ -68,22 +67,26 @@ function load() {
                 // Filter tasks for this date and append them with class 'event'
                 const tasksForDay = tasks.filter(task => new Date(task.taskDateDue).toISOString().split('T')[0] === isoDayString);
                 tasksForDay.forEach(task => {
-                    const taskElement = document.createElement('div');
-                    taskElement.classList.add('event'); // Apply 'event' class for styling
-                    taskElement.textContent = task.taskName; // Simplify for demonstration
-
-                    const taskDueDate = new Date(task.taskDateDue);
-                    const currentDate = new Date();
-                    currentDate.setHours(0,0,0,0); // Reset hours for accurate comparison
-
-                    if (task.taskStatus === 'Started') {
-                        taskElement.classList.add('started'); // Add 'started' class for started tasks
-                    } else if (taskDueDate < currentDate) {
-                        taskElement.classList.add('overdue'); // Add 'overdue' class for overdue tasks
+                    // Check if the task is not deleted and not complete
+                    if (!task.isTaskDeleted && task.taskStatus !== 'Complete') {
+                        const taskElement = document.createElement('div');
+                        taskElement.classList.add('event'); // Apply 'event' class for styling
+                        taskElement.textContent = task.taskName; // Simplify for demonstration
+                
+                        const taskDueDate = new Date(task.taskDateDue);
+                        const currentDate = new Date();
+                        currentDate.setHours(0,0,0,0); // Reset hours for accurate comparison
+                
+                        if (task.taskStatus === 'Started') {
+                            taskElement.classList.add('started'); // Add 'started' class for started tasks
+                        } else if (taskDueDate < currentDate) {
+                            taskElement.classList.add('overdue'); // Add 'overdue' class for overdue tasks
+                        }
+                
+                        daySquare.appendChild(taskElement);
                     }
-
-                    daySquare.appendChild(taskElement);
                 });
+                
                 
             } else {
                 daySquare.classList.add('padding');
