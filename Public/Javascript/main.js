@@ -348,7 +348,7 @@ function displayTasks() {
       .then(tasks => {
           tasks.forEach(task => {
               // Skip tasks marked as deleted
-              if (task.isTaskDeleted) return;
+              if (task.isTaskDeleted || task.taskStatus === 'Completed') return;
 
               const taskElement = document.createElement("div");
               taskElement.id = `task-${task._id}`;
