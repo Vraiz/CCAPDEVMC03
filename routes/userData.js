@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
     try {
         let fUser = await userSchema.findOne({userName: req.body.userName});
         if (fUser) {
-            return res.status(400).send('Username already exists');
+            return res.status(400).send({message: 'Username already exists'});
         } else {
             const newUser = await user.save()
             res.status(201).json(newUser)

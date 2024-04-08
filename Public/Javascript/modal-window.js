@@ -25,33 +25,53 @@ window.onclick = function (event) {
 }
 
 function handleLogin() {
-    //putting login validation here
-    const username = document.getElementById('email').value;
-    const password = document.getElementById('password').value.trim();
+    const userElement = document.getElementById('username');
+    const passwordElement = document.getElementById('password');
 
-    // Example validation
-    if (!username || !password) {
-        alert('Please enter both username and password');
+    if (!userElement || !passwordElement) {
+        console.error('Login form elements not found!');
         return;
     }
 
+    const username = userElement.value;
+    const password = passwordElement.value;
 
-    fetch('http://localhost:3000/login', {
+    fetch('/userdatas/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ userName: username, userPassword: password }),
     })
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
-            alert(data);
-            if (data === 'Login successful') {
-                window.location.href = 'main.html';
+            if (data.success) {
+                // Assuming your server responds with { success: true, userID: "someId" } on successful login
+                localStorage.setItem('currentUserID', data.userID);
+                window.location.href = '/pages/main';
+                // Redirect or update UI as necessary
+            } else {
+                // If your server responds with { success: false } on failed login
+                alert("wrong username or password");
             }
         })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('An error occurred');
+        .catch(error => {
+            console.error('Error during login:', error);
+            alert('An error occurred during login');
         });
 }
+
+window.onload = function() {
+    let userID = localStorage.getItem("currentUserID")
+    if (userID != null || userID != undefined) {
+        window.location.href = "/pages/main"
+        console.log(userID)
+    } else {
+        console.log("no user")
+    }
+};

@@ -33,7 +33,8 @@ router.post('/', async (req, res) => {
         TaskCreditsReward: req.body.TaskCreditsReward,
         TaskRollReward: req.body.TaskRollReward,
         taskStatus: req.body.taskStatus,
-        isTaskDeleted: req.body.isTaskDeleted
+        isTaskDeleted: req.body.isTaskDeleted,
+        isTaskOverdue: req.body.isTaskOverdue
     })
     try {
         const newTask = await task.save()
@@ -89,6 +90,9 @@ router.patch('/:id', getTask, async (req, res) => {
     }
     if (req.body.isTaskDeleted != null) {
         res.task.isTaskDeleted = req.body.isTaskDeleted
+    }
+    if (req.body.isTaskOverdue != null) {
+        res.task.isTaskOverdue = req.body.isTaskOverdue
     }
     try{
         const updatedTask = await res.task.save()

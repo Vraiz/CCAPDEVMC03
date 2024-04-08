@@ -51,6 +51,11 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    isTaskOverdue: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 

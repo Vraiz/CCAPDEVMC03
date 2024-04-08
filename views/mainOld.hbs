@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/CSS/main.css">
+    <title>Home</title>
 </head>
 
 <body>
@@ -75,7 +76,6 @@
                 </table>
             </section>
         </main> -->
-
     <div class="app">
         <h4 class="mb-3">Todo List</h4>
         <div id="addNew" data-bs-toggle="modal" data-bs-target="#form">
@@ -112,23 +112,11 @@
                             <br>
                             <p>Description</p>
                             <textarea class="form-control" id="textArea" cols="30" rows="5"></textarea>
-                            <p>Difficulty</p>
-                            <select class="form-select" aria-label="Default select example" id="difficulty">
-                                <option selected>Choose a Difficulty</option>
-                                <option value=500>Easy</option>
-                                <option value=1500>Medium</option>
-                                <option value=3000>Hard</option>
-                            </select>
-                            <p>Task Status</p>
-                            <select class="form-select" aria-label="Default select example" id="statusInput">
-                                <option selected></option>
-                                <option value="Not Started">Not Started</option>
-                                <option value="Started">Started</option>
-                            </select>
+                            ...
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn">Add Assignment</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#form">Add Assignment</button>
                         </div>
                     </div>
                 </div>
@@ -139,8 +127,8 @@
     </div>
 
     
+    </main>
 
-    
     <!-- Profile button -->
 
     <!-- Profile Modal -->
@@ -156,7 +144,7 @@
             <p><strong>Coins:</strong> <span id="coins"></span></p>
             <p><strong>5 Star pity:</strong> <span id="5pity"></span></p>
             <p><strong>4 Star pity:</strong> <span id="4pity"></span></p>
-            <button onclick="logout()" class="btn btn-danger">Logout</button>
+            <button onclick="logout()" class="btn btn-danger" id="logout">Logout</button>
         </div>
     </div>
     <script defer src="/static/Javascript/main.js"></script>

@@ -1,0 +1,78 @@
+
+GET http://localhost:3000/userdatas
+
+
+###
+
+GET  http://localhost:3000/userdatas/65f034ca8907c0c5d7f6d43f
+
+
+###
+
+POST http://localhost:3000/userdatas
+Content-Type: application/json
+
+{
+    "email": 2,
+    
+    "userName": "tixs2",
+    "userPassword": "1234"
+}
+
+
+###
+DELETE http://localhost:3000/userdatas/65f034ca8907c0c5d7f6d43f
+
+
+###
+PUT http://localhost:3000/userdatas/65f06947aba6e8e3415c28a7
+Content-Type: application/json
+
+{
+    "_id": "65f06947aba6e8e3415c28a7",
+    "userID": 0,
+    "userName": "123",
+    "userPassword": "123",
+    "fiveStarPity": 4,
+    "fourStarPity": 4,
+    "dateCreated": "2024-03-12T14:40:07.723Z",
+    "credits": 0,
+    "Rolls": 0,
+    "TotalRolls": 0,
+    "TotalTasksCompleted": 0,
+    "__v": 0
+}
+###
+PATCH  http://localhost:3000/userdatas/661247130e490b92545b4b89
+Content-Type: application/json
+
+{
+    "fiveStarPity": 0,
+    "fourStarPity": 0,
+    "credits": 10000,
+    "Rolls": 45,
+    "TotalRolls": 0
+}
+###
+
+POST http://localhost:3000/tasks/
+Content-Type: application/json
+
+{
+    "userID": "660d75e912b03b6d5fed00a8",
+    "taskName": "do hamwork4",
+    "TaskCreditsReward": 1000,
+    "TaskRollReward":5
+
+}
+
+###
+GET http://localhost:3000/tasks
+
+
+###
+
+GET http://localhost:3000/items/getItems/661295b61afb422ef3dac5a9
+
+
+###

@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(response => response.text())
             .then(data => {
-                if(data != 'Username already exists'){     
-                    let data2 = JSON.parse(data)
+                let data2 = JSON.parse(data)
+                if(data2.email == email){     
                     localStorage.setItem('currentUserID', data2._id)
                     console.log(data2._id)
                     fetch('/items', {//creates an inventory object for the user
@@ -41,15 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         body: JSON.stringify({
                             "userID": data2._id
                         })
-                    }).catch(err => console.log('error'))
+                    }).catch(err => console.log('error: ' + error))
                     alert('User created successfully');
                     window.location.href = '/pages/landingpage';
-                }else{
+                }else if(data2.message == 'Username already exists'){
                     alert('User name already exists');
+                }else{
+                    alert(data);
                 }
             })
             .catch((error) => {
-                console.error('Error:', error);
+                console.error('Error:' + error);
                 alert('An error occurred');
             });
     });

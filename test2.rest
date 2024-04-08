@@ -1,0 +1,50 @@
+###
+
+GET http://localhost:3000/items
+
+
+###
+
+
+POST http://localhost:3000/items
+Content-Type: application/json
+
+{
+    "userID": "65f1525b51f08fc49e530f3c"
+}
+
+
+###
+
+PATCH  http://localhost:3000/items/661247130e490b92545b4b8b
+Content-Type: application/json
+
+{
+    "itemName": [],
+    "itemDesc": [],
+    "itemPrice": [],
+    "itemCount": [],
+    "itemIMG": [],
+    "itemRarity": [],
+    "itemIndex": []
+}
+
+###
+
+###
+PATCH  http://localhost:3000/userdatas/661247130e490b92545b4b89
+Content-Type: application/json
+
+{
+    "fiveStarPity": 0,
+    "fourStarPity": 0,
+    "credits": 10000,
+    "Rolls": 45,
+    "TotalRolls": 0
+}
+###
+
+GET http://localhost:3000/items/getItems/660d75e912b03b6d5fed00a8
+
+
+###

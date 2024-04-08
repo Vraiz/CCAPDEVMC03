@@ -23,6 +23,11 @@ db.once('open', () => console.log('Connected to DB!'))
 
 app.use(express.json())
 
+
+app.get('/', async (req, res) => {
+    res.render('index')
+})
+
 const viewRouter = require('./routes/views')
 app.use('/pages', viewRouter)
 
