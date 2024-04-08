@@ -21,6 +21,14 @@ function closeProfileModal() {
 function hideModal() {
   document.getElementById("form").style.display = "none";
 }
+
+const readData = async () => {
+  let userID = localStorage.getItem("currentUserID")
+  let rollDataR = await fetch('/userdatas/' + userID)
+  let rollData = await rollDataR.json();
+  return rollData;
+}
+
 let fetchUserData = async () => {
   try {
     let userID = localStorage.getItem('currentUserID');
