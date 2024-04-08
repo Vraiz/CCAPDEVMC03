@@ -29,6 +29,8 @@ const readData = async () => {
   return rollData;
 }
 
+let userID
+
 let fetchUserData = async () => {
   try {
     let userID = localStorage.getItem('currentUserID');
@@ -138,7 +140,6 @@ let createNewTask = () => {
     TaskCreditsReward: difficulty.value,
     taskStatus: statusInput.value,
   };
-  console.log('test')
   fetch('/tasks', {
     method: 'POST',
     headers: {
@@ -224,6 +225,8 @@ let deleteTask = (taskID) => {
 };
 
 let completeTask = async (taskID) => {
+  let rollData = await readData()
+
   fetch(`/tasks/` + taskID)
     .then(response => {
       if (!response.ok) {
@@ -235,6 +238,18 @@ let completeTask = async (taskID) => {
       // Store the TaskCreditsReward temporarily
       const taskCreditsReward = taskData.TaskCreditsReward;
       console.log("TaskCreditsReward:", taskCreditsReward); // Log it or store it as needed
+
+      //updates user balance
+      console.log(userID + taskCreditsReward) 
+      fetch(('/userdatas/' + userID), {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            credits: rollData.credits + taskCreditsReward
+        })
+      })
 
       // Now update the task as completed
       return fetch(`/tasks/` + taskID, {
@@ -258,17 +273,6 @@ let completeTask = async (taskID) => {
       console.error('Error:', error);
       alert('An error occurred while completing the task');
     });
-
-    let rollData = await readData()
-    fetch(('/userdatas/' + userID), {
-      method: "PATCH",
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          credits: rollData.credits + TaskCreditsReward
-      })
-    })
 };
 
 let currentTaskID = null;
@@ -416,7 +420,7 @@ function displayTasks() {
 }
 
 window.onload = function() {
-  let userID = localStorage.getItem("currentUserID")
+  userID = localStorage.getItem("currentUserID")
   if (userID == null || userID == undefined) {
       window.location.href = "/"
       console.log(userID)
